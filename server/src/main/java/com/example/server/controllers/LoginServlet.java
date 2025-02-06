@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             responseJson.put("message", "Login Successful!");
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            responseJson.put("message", "Invalid Email or Password!");
+            responseJson.put("message", "Invalid Username or Password!");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
 

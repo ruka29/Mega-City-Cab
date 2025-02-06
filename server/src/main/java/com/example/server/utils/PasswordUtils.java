@@ -8,7 +8,7 @@ public class PasswordUtils {
     }
 
     public static boolean checkPassword(String password, String hashedPassword) {
-        BCrypt.Result result = BCrypt.verifyer().verify(hashedPassword.toCharArray(), password.toCharArray());
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword.toCharArray());
         return result.verified;
     }
 }
