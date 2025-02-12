@@ -1,6 +1,6 @@
 package com.example.server.models;
 
-public class User {
+public class Employee {
     private String id;
     private String firstName;
     private String lastName;
@@ -9,9 +9,9 @@ public class User {
     private String password;
     private String designation;
 
-    public User() {}
+    public Employee() {}
 
-    public User(String id, String firstName, String lastName, String email, String username, String password, String designation) {
+    public Employee(String id, String firstName, String lastName, String email, String username, String password, String designation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
