@@ -1,21 +1,23 @@
 package com.example.server.models;
 
-public class Employee {
+public class User {
     private String id;
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
     private String username;
     private String password;
     private String designation;
 
-    public Employee() {}
+    public User() {}
 
-    public Employee(String id, String firstName, String lastName, String email, String username, String password, String designation) {
+    public User(String id, String firstName, String lastName, String email, String phone, String username, String password, String designation) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
         this.username = username;
         this.password = password;
         this.designation = designation;
@@ -47,6 +49,13 @@ public class Employee {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getUsername() {

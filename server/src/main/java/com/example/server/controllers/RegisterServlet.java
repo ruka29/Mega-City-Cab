@@ -1,6 +1,6 @@
 package com.example.server.controllers;
 
-import com.example.server.services.EmployeeService;
+import com.example.server.services.UserService;
 import com.example.server.utils.JsonUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 @WebServlet("/api/auth/register")
 public class RegisterServlet extends HttpServlet {
-    private final EmployeeService employeeService = new EmployeeService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,13 +26,14 @@ public class RegisterServlet extends HttpServlet {
         String username = requestBody.get("username");
         String password = requestBody.get("password");
         String designation = requestBody.get("designation");
+        String department = requestBody.get("department");
 
         Map<String, String> jsonResponse = new HashMap<>();
         if (firstName == null || lastName == null || email == null || username == null || password == null || designation == null) {
             jsonResponse.put("message", "All fields are required");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            boolean success = employeeService.register(firstName, lastName, email, username, password, designation);
+            boolean success = userService.register(firstName, lastName, email, username, password, designation, department);
             if (success) {
                 jsonResponse.put("message", "Employee registered successfully!");
                 response.setStatus(HttpServletResponse.SC_OK);

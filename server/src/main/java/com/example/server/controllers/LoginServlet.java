@@ -1,6 +1,6 @@
 package com.example.server.controllers;
 
-import com.example.server.services.EmployeeService;
+import com.example.server.services.UserService;
 import com.example.server.utils.JsonUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 @WebServlet("/api/auth/login")
 public class LoginServlet extends HttpServlet {
-    private final EmployeeService employeeService = new EmployeeService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         String username = requestBody.get("username");
         String password = requestBody.get("password");
 
-        boolean success = employeeService.login(username, password);
+        boolean success = userService.login(username, password);
         Map<String, String> responseJson = new HashMap<>();
 
         if (success) {
