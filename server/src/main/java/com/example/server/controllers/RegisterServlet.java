@@ -23,19 +23,19 @@ public class RegisterServlet extends HttpServlet {
         String firstName = requestBody.get("firstName");
         String lastName = requestBody.get("lastName");
         String email = requestBody.get("email");
+        String phone = requestBody.get("phone");
         String username = requestBody.get("username");
         String password = requestBody.get("password");
         String designation = requestBody.get("designation");
-        String department = requestBody.get("department");
 
         Map<String, String> jsonResponse = new HashMap<>();
-        if (firstName == null || lastName == null || email == null || username == null || password == null || designation == null) {
+        if (firstName == null || lastName == null || email == null || phone == null || username == null || password == null || designation == null) {
             jsonResponse.put("message", "All fields are required");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         } else {
-            boolean success = userService.register(firstName, lastName, email, username, password, designation, department);
+            boolean success = userService.register(firstName, lastName, email, phone, username, password, designation);
             if (success) {
-                jsonResponse.put("message", "Employee registered successfully!");
+                jsonResponse.put("message", designation + " registered successfully!");
                 response.setStatus(HttpServletResponse.SC_OK);
             }
         }
