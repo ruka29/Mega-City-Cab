@@ -26,6 +26,4 @@ public class UserService {
         User user = new User(userID, firstName, lastName, email, phone, username, hashedPassword, designation);
         return userDAO.registerEmployee(user);
     }
-
-
 }

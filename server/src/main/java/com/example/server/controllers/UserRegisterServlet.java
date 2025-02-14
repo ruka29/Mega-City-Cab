@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/api/auth/register")
-public class RegisterServlet extends HttpServlet {
+public class UserRegisterServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     @Override
@@ -37,6 +37,9 @@ public class RegisterServlet extends HttpServlet {
             if (success) {
                 jsonResponse.put("message", designation + " registered successfully!");
                 response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                jsonResponse.put("message", designation + " registration failed! " + designation + " already exists!");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }
 
