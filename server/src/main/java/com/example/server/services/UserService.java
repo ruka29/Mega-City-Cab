@@ -3,7 +3,7 @@ package com.example.server.services;
 import com.example.server.dao.UserDAO;
 import com.example.server.models.User;
 import com.example.server.utils.PasswordUtils;
-import com.example.server.utils.UserIDUtils;
+import com.example.server.utils.IDUtils;
 
 public class UserService {
     private final UserDAO userDAO = new UserDAO();
@@ -22,7 +22,7 @@ public class UserService {
         }
 
         String hashedPassword = PasswordUtils.hashPassword(password);
-        String userID = UserIDUtils.generateUserID(designation);
+        String userID = IDUtils.generateUserID(userDAO, designation);
         User user = new User(userID, firstName, lastName, email, phone, username, hashedPassword, designation);
         return userDAO.registerEmployee(user);
     }
