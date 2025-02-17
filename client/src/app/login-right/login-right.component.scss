@@ -1,0 +1,7 @@
+.login-right {
+    @apply flex justify-center items-center h-[calc(100vh-20px)] overflow-hidden;
+
+    img {
+        @apply object-cover w-full h-auto mr-[150px];
+    }
+}
