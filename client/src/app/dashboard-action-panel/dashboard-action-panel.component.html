@@ -1,0 +1,9 @@
+<div class="action-panel-container">
+  <ng-container [ngSwitch]="activeTab">
+    <app-default-tab *ngSwitchCase="''"></app-default-tab>
+    <app-new-reservation-tab *ngSwitchCase="'new reservation'"></app-new-reservation-tab>
+    <app-manage-customers-tab *ngSwitchCase="'manage customers'"></app-manage-customers-tab>
+    <app-manage-reservation-tab *ngSwitchCase="'manage reservations'"></app-manage-reservation-tab>
+    <app-profile-tab *ngSwitchCase="'profile'"></app-profile-tab>
+  </ng-container>
+</div>

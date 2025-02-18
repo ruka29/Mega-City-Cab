@@ -1,0 +1,65 @@
+<div class="side-panel-container">
+  <div class="logo">
+    <img src="/logo.png" alt="logo" />
+  </div>
+
+  <div class="greeting">
+    <p>Good Morning, Rukshan!</p>
+  </div>
+
+  <div class="upper-btn-container">
+    <button
+      class="btn"
+      (click)="setActive('new reservation')"
+      [ngClass]="{
+        'bg-[#FFB8008C]': activeTab === 'new reservation',
+        'bg-white': activeTab !== 'new reservation'
+      }"
+    >
+      <img src="/add.png" alt="add icon" />
+      <span>New Reservation</span>
+    </button>
+
+    <button
+      class="btn"
+      (click)="setActive('manage customers')"
+      [ngClass]="{
+        'bg-[#FFB8008C]': activeTab === 'manage customers',
+        'bg-white': activeTab !== 'manage customers'
+      }"
+    >
+      <img src="/customer.png" alt="customer icon" />
+      <span>Manage Customers</span>
+    </button>
+
+    <button
+      class="btn"
+      (click)="setActive('manage reservations')"
+      [ngClass]="{
+        'bg-[#FFB8008C]': activeTab === 'manage reservations',
+        'bg-white': activeTab !== 'manage reservations'
+      }"
+    >
+      <img src="/time-management.png" alt="manage reservations icon" />
+      <span>Manage Reservations</span>
+    </button>
+  </div>
+  <div class="lower-btn-container">
+    <button
+      class="btn"
+      (click)="setActive('profile')"
+      [ngClass]="{
+        'bg-[#FFB8008C]': activeTab === 'profile',
+        'bg-white': activeTab !== 'profile'
+      }"
+    >
+      <img src="/user.png" alt="profile icon" />
+      <span>Profile</span>
+    </button>
+
+    <button class="btn">
+      <img src="/logout.png" alt="logout icon" />
+      <span>Log Out</span>
+    </button>
+  </div>
+</div>

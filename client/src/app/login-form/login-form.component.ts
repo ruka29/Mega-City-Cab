@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -17,7 +18,8 @@ import {
 })
 export class LoginFormComponent {
   private http = inject(HttpClient);
-  errormessage: string = "";
+  private router = inject(Router);
+  errormessage: string = '';
 
   loginForm = new FormGroup({
     username: new FormControl('', [
@@ -37,7 +39,11 @@ export class LoginFormComponent {
           loginData
         )
         .subscribe({
-          next: (response) => console.log('Login Successful:', response),
+          next: (response) => {
+            console.log('Login Successful:', response);
+
+            this.router.navigate(['/dashboard']);
+          },
           error: (error) => {
             if (error.error && error.error.message) {
               console.error('Login Failed:', error.error.message);
@@ -45,7 +51,7 @@ export class LoginFormComponent {
             } else {
               console.error('Login Failed:', 'An unknown error occurred.');
             }
-          }
+          },
         });
     } else {
       console.log('Invalid Form');

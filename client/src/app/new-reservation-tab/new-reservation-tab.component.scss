@@ -1,0 +1,71 @@
+.container {
+    @apply m-[40px];
+}
+
+.heading {
+    @apply text-4xl font-nunito font-bold;
+}
+
+.form-container {
+    @apply flex mt-10;
+}
+
+.customer-form {
+    @apply flex flex-col w-[calc(((100vw-330px)-80px)/2)] space-y-5;
+}
+
+.label {
+    @apply text-xl font-nunito;
+}
+
+.load-customer {
+    @apply flex space-x-10;
+
+    input {
+        @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito;
+    }
+
+    button {
+        @apply w-[250px] bg-[#FFB800] text-black py-3 rounded-[9px] hover:bg-amber-500 transition duration-300 font-nunito font-bold;
+    }
+}
+
+.name {
+    @apply flex space-x-10;
+}
+
+.first-name {
+    @apply w-[250px];
+}
+
+.details {
+    @apply font-nunito text-2xl font-bold;
+}
+
+.email-nic {
+    @apply flex space-x-10;
+}
+
+.email {
+    @apply w-[250px];
+}
+
+.locations {
+    @apply flex space-x-10;
+}
+
+.pick {
+    @apply w-[250px];
+
+    input {
+        @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito;
+    }
+}
+
+.drop {
+    @apply w-[250px];
+
+    input {
+        @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito;
+    }
+}
