@@ -31,11 +31,12 @@ export class LoginFormComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      const url = 'http://localhost:8080/server_war_exploded/api/auth/login';
       const loginData = this.loginForm.value;
 
       this.http
         .post(
-          'http://localhost:8080/server_war_exploded/api/auth/login',
+          url,
           loginData
         )
         .subscribe({

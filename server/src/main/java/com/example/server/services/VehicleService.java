@@ -11,7 +11,7 @@ public class VehicleService {
             return false;
         }
 
-        Vehicle vehicle = new Vehicle(registrationNumber, driverID, type, brand, model, year, passengerCount, insuranceExpDate, licenseExpDate);
+        Vehicle vehicle = new Vehicle(registrationNumber, driverID, type, brand, model, year, "available", passengerCount, insuranceExpDate, licenseExpDate);
         return vehicleDAO.addVehicle(vehicle);
     }
 }

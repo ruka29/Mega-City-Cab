@@ -27,6 +27,7 @@ public class VehicleDAO {
                 vehicleDoc.getString("brand"),
                 vehicleDoc.getString("model"),
                 vehicleDoc.getString("year"),
+                vehicleDoc.getString("status"),
                 vehicleDoc.getString("passengerCount"),
                 vehicleDoc.getString("insuranceExpDate"),
                 vehicleDoc.getString("licenseExpDate")
@@ -44,6 +45,7 @@ public class VehicleDAO {
                 .append("brand", vehicle.getBrand())
                 .append("model", vehicle.getModel())
                 .append("year", vehicle.getYear())
+                .append("status", vehicle.getStatus())
                 .append("passengerCount", vehicle.getPassengerCount())
                 .append("InsuranceExpDate", vehicle.getInsuranceExpDate())
                 .append("licenseExpDate", vehicle.getLicenseExpDate());

@@ -7,19 +7,21 @@ public class Vehicle {
     private String brand;
     private String model;
     private String year;
+    private String status;
     private String passengerCount;
     private String insuranceExpDate;
     private String licenseExpDate;
 
     public Vehicle() {}
 
-    public Vehicle(String registrationNumber, String driverID, String type, String brand, String model, String year, String passengerCount, String insuranceExpDate, String licenseExpDate) {
+    public Vehicle(String registrationNumber, String driverID, String type, String brand, String model, String year, String status, String passengerCount, String insuranceExpDate, String licenseExpDate) {
         this.registrationNumber = registrationNumber;
         this.driverID = driverID;
         this.type = type;
         this.brand = brand;
         this.model = model;
         this.year = year;
+        this.status = status;
         this.passengerCount = passengerCount;
         this.insuranceExpDate = insuranceExpDate;
         this.licenseExpDate = licenseExpDate;
@@ -65,6 +67,13 @@ public class Vehicle {
     }
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getPassengerCount() {

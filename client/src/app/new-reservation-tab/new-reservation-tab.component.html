@@ -8,37 +8,46 @@
       <div class="customer-form">
         <div class="label">Customer Mobile Number</div>
         <div class="load-customer">
-          <input type="text" />
-          <button>Get Customer</button>
+          <input
+            type="text"
+            #customerPhone
+            (input)="onCusPhoneChange(customerPhone.value)"
+          />
         </div>
 
-        <div class="name">
-          <div class="first-name">
-            <div class="label">First Name</div>
-            <div class="details">Rukshan</div>
+        <div *ngIf="customerID !== ''">
+          <div class="name">
+            <div class="first-name">
+              <div class="label">First Name</div>
+              <div class="details">{{ fisrtName }}</div>
+            </div>
+
+            <div class="last-name">
+              <div class="label">Last Name</div>
+              <div class="details">{{ lastName }}</div>
+            </div>
           </div>
 
-          <div class="last-name">
-            <div class="label">Last Name</div>
-            <div class="details">Kumara</div>
+          <div class="address">
+            <div class="label">Address</div>
+            <div class="details">{{ address }}</div>
+          </div>
+
+          <div class="email-nic">
+            <div class="email">
+              <div class="label">Email</div>
+              <div class="details">{{ email }}</div>
+            </div>
+
+            <div class="nic">
+              <div class="label">NIC</div>
+              <div class="details">{{ nic }}</div>
+            </div>
           </div>
         </div>
 
-        <div class="address">
-          <div class="label">Address</div>
-          <div class="details">98/4A, Ranala Rd, Habarakada, Homagama.</div>
-        </div>
-
-        <div class="email-nic">
-          <div class="email">
-            <div class="label">Email</div>
-            <div class="details">rukshankumaragmail.com</div>
-          </div>
-
-          <div class="nic">
-            <div class="label">NIC</div>
-            <div class="details">200218100563</div>
-          </div>
+        <div class="customer-error">
+          <p *ngIf="customerID === ''">{{customerErrorMessage}}</p>
         </div>
 
         <div class="locations">
@@ -79,7 +88,14 @@
       <div class="vehicle-form">
         <div class="label">Vehicle Type</div>
         <div class="vehicle-type">
-          <button class="vehicle-btn">
+          <button
+            class="vehicle-btn"
+            (click)="setVehicleType('tuk', $event)"
+            [ngClass]="{
+              'border-[#FFB800]': vehicleType === 'tuk',
+              'border-gray-300': vehicleType !== 'tuk'
+            }"
+          >
             <div class="vehicle-container">
               <img src="/tuk.png" alt="tuk icon" />
               <div class="passenger">
@@ -90,7 +106,14 @@
             </div>
           </button>
 
-          <button class="vehicle-btn">
+          <button
+            class="vehicle-btn"
+            (click)="setVehicleType('car', $event)"
+            [ngClass]="{
+              'border-[#FFB800]': vehicleType === 'car',
+              'border-gray-300': vehicleType !== 'car'
+            }"
+          >
             <div class="vehicle-container">
               <img src="/sedan.png" alt="tuk icon" />
               <div class="passenger">
@@ -100,7 +123,14 @@
               <p class="vehicle-name">Car</p>
             </div>
           </button>
-          <button class="vehicle-btn">
+          <button
+            class="vehicle-btn"
+            (click)="setVehicleType('van', $event)"
+            [ngClass]="{
+              'border-[#FFB800]': vehicleType === 'van',
+              'border-gray-300': vehicleType !== 'van'
+            }"
+          >
             <div class="vehicle-container">
               <img src="/van.png" alt="tuk icon" />
               <div class="passenger">

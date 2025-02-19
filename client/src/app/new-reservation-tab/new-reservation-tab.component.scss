@@ -47,11 +47,15 @@
 }
 
 .email-nic {
-    @apply flex space-x-16 mb-10;
+    @apply flex space-x-16;
 }
 
 .email {
     @apply w-[250px];
+}
+
+.customer-error {
+    @apply text-xl text-red-500 font-nunito justify-center items-center mb-10;
 }
 
 .locations {
@@ -109,7 +113,7 @@
 }
 
 .vehicle-btn {
-    @apply border border-gray-300 rounded-[9px] pt-[10px] pr-[15px] pb-[10px] pl-[15px];;
+    @apply border border-[2px] hover:border-[#FFB800] hover:border-[2px] rounded-[9px] pt-[10px] pr-[15px] pb-[10px] pl-[15px];;
 }
 
 .vehicle-container {
