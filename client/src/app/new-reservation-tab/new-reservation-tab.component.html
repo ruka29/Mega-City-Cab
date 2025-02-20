@@ -47,7 +47,7 @@
         </div>
 
         <div class="customer-error">
-          <p *ngIf="customerID === ''">{{customerErrorMessage}}</p>
+          <p *ngIf="customerID === ''">{{ customerErrorMessage }}</p>
         </div>
 
         <div class="locations">
@@ -144,20 +144,49 @@
 
         <div class="label">Driver & Vehicle Details</div>
 
-        <div class="driver-details">
-          <div class="driver-name">
-            <div class="label">Driver Name</div>
-            <div class="details">Rukshan Kumara</div>
+        <div *ngIf="registrationNumber !== '' && driverEmail !== ''">
+          <div class="driver-details">
+            <div class="driver-name">
+              <div class="label">Driver Name</div>
+              <div class="details">
+                {{ driverFirstName + " " + driverLastName }}
+              </div>
+            </div>
+
+            <div class="driver-phone">
+              <div class="label">Mobile Number</div>
+              <div class="details">{{ driverPhone }}</div>
+            </div>
           </div>
 
-          <div class="driver-phone">
-            <div class="label">Mobile Number</div>
-            <div class="details">0702335676</div>
+          <div class="vehicle-details">
+            <div class="regNumber">
+              <div class="label">Vehicle Number</div>
+              <div class="details">{{ registrationNumber }}</div>
+            </div>
+            <div class="brand">
+              <div class="label">Vehicle Brand</div>
+              <div class="details">{{ brand }}</div>
+            </div>
+          </div>
+
+          <div class="vehicle-license">
+            <div class="license-exp-date">
+              <div class="label">License Expiry Date</div>
+              <div class="details">{{ licenseExpDate }}</div>
+            </div>
+            <div class="insurance-exp-date">
+              <div class="label">Insurance Expiry Date</div>
+              <div class="details">{{ insuranceExpDate }}</div>
+            </div>
           </div>
         </div>
 
-        <div class="label">Vehicle Number</div>
-        <div class="details">ABP-9888</div>
+        <div class="customer-error">
+          <p *ngIf="registrationNumber === '' && driverEmail === ''">
+            {{ vehicleErrorMessage }}
+          </p>
+        </div>
       </div>
     </div>
   </form>

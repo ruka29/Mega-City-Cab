@@ -14,8 +14,8 @@ export class NewReservationTabComponent {
   schedule: boolean = false;
   vehicleType: string = '';
   customerPhone: string = '';
-  customerErrorMessage: string = '';
-  vehicleErrorMessage: string = '';
+  customerErrorMessage: string = 'Please enter a registered customer phone number!';
+  vehicleErrorMessage: string = 'Please select a vehicle type!';
 
   customerID: string = '';
   fisrtName: string = '';
@@ -26,7 +26,7 @@ export class NewReservationTabComponent {
   nic: string = '';
 
   registrationNumber: string = '';
-  driverID: string = '';
+  username: string = '';
   brand: string = '';
   licenseExpDate: string = '';
   insuranceExpDate: string = '';
@@ -78,7 +78,7 @@ export class NewReservationTabComponent {
 
   getVehicle() {
     const url =
-      'http://localhost:8080/server_war_exploded/api/manage-vehicles/get-vehicle';
+      'http://localhost:8080/server_war_exploded/api/manage-vehicles/get-available-vehicle';
     const vehicleData = { type: this.vehicleType };
 
     this.http
@@ -87,7 +87,7 @@ export class NewReservationTabComponent {
         next: (response) => {
           if (response.status === 'success') {
             this.registrationNumber = response.vehicle.registrationNumber;
-            this.driverID = response.vehicle.driverID;
+            this.username = response.vehicle.username;
             this.brand = response.vehicle.brand;
             this.licenseExpDate = response.vehicle.licenseExpDate;
             this.insuranceExpDate = response.vehicle.insuranceExpDate;
@@ -106,24 +106,22 @@ export class NewReservationTabComponent {
   getDriver() {
     const url =
       'http://localhost:8080/server_war_exploded/api/manage-users/get-user';
-    const driverData = { userID: this.driverID, designation: 'Driver' };
+    const driverData = { username: this.username };
 
-    this.http
-      .post<{ status: string; user: any }>(url, driverData)
-      .subscribe({
-        next: (response) => {
-          if (response.status === 'success') {
-            this.driverFirstName = response.user.firstName;
-            this.driverLastName = response.user.lastName;
-            this.driverEmail = response.user.email;
-            this.driverPhone = response.user.phone;
-          }
-        },
-        error: (error) => {
-          console.error('Error:', error);
-          // this.responseData = 'Error occurred';
-        },
-      });
+    this.http.post<{ status: string; user: any }>(url, driverData).subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          this.driverFirstName = response.user.firstName;
+          this.driverLastName = response.user.lastName;
+          this.driverEmail = response.user.email;
+          this.driverPhone = response.user.phone;
+        }
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        // this.responseData = 'Error occurred';
+      },
+    });
   }
 
   setSchedule(event: Event) {

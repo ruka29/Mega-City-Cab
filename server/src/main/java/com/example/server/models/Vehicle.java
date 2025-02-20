@@ -2,7 +2,7 @@ package com.example.server.models;
 
 public class Vehicle {
     private String registrationNumber;
-    private String driverID;
+    private String username;
     private String type;
     private String brand;
     private String model;
@@ -14,9 +14,9 @@ public class Vehicle {
 
     public Vehicle() {}
 
-    public Vehicle(String registrationNumber, String driverID, String type, String brand, String model, String year, String status, String passengerCount, String insuranceExpDate, String licenseExpDate) {
+    public Vehicle(String registrationNumber, String username, String type, String brand, String model, String year, String status, String passengerCount, String insuranceExpDate, String licenseExpDate) {
         this.registrationNumber = registrationNumber;
-        this.driverID = driverID;
+        this.username = username;
         this.type = type;
         this.brand = brand;
         this.model = model;
@@ -34,11 +34,11 @@ public class Vehicle {
         this.registrationNumber = registrationNumber;
     }
 
-    public String getDriverID() {
-        return driverID;
+    public String getUsername() {
+        return username;
     }
-    public void setDriverID(String driverID) {
-        this.driverID = driverID;
+    public void setUsername(String driverID) {
+        this.username = username;
     }
 
     public String getType() {

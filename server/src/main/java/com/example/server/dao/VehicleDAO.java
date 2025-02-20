@@ -4,6 +4,7 @@ import com.example.server.config.MongoDBConnection;
 import com.example.server.models.Vehicle;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -19,18 +20,28 @@ public class VehicleDAO {
     public Vehicle findByRegistrationNumber(String registrationNumber) {
         Document vehicleDoc = vehicleCollection.find(eq("registrationNumber", registrationNumber)).first();
 
+        return getVehicle(vehicleDoc);
+    }
+
+    public Vehicle findByAvailability(String type) {
+        Document vehicleDoc = vehicleCollection.find(Filters.and(Filters.eq("type", type), Filters.eq("status", "available"))).first();
+
+        return getVehicle(vehicleDoc);
+    }
+
+    private Vehicle getVehicle(Document vehicleDoc) {
         if (vehicleDoc != null) {
             return new Vehicle(
-                vehicleDoc.getString("registrationNumber"),
-                vehicleDoc.getString("driverID"),
-                vehicleDoc.getString("type"),
-                vehicleDoc.getString("brand"),
-                vehicleDoc.getString("model"),
-                vehicleDoc.getString("year"),
-                vehicleDoc.getString("status"),
-                vehicleDoc.getString("passengerCount"),
-                vehicleDoc.getString("insuranceExpDate"),
-                vehicleDoc.getString("licenseExpDate")
+                    vehicleDoc.getString("registrationNumber"),
+                    vehicleDoc.getString("username"),
+                    vehicleDoc.getString("type"),
+                    vehicleDoc.getString("brand"),
+                    vehicleDoc.getString("model"),
+                    vehicleDoc.getString("year"),
+                    vehicleDoc.getString("status"),
+                    vehicleDoc.getString("passengerCount"),
+                    vehicleDoc.getString("insuranceExpDate"),
+                    vehicleDoc.getString("licenseExpDate")
             );
         }
 
@@ -40,7 +51,7 @@ public class VehicleDAO {
     public boolean addVehicle(Vehicle vehicle) {
         Document newVehicle = new Document()
                 .append("registrationNumber", vehicle.getRegistrationNumber())
-                .append("driverID", vehicle.getDriverID())
+                .append("username", vehicle.getUsername())
                 .append("type", vehicle.getType())
                 .append("brand", vehicle.getBrand())
                 .append("model", vehicle.getModel())

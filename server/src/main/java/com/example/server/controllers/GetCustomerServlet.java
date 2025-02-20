@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/api/manage-customers/get-customer")
-public class GetCustomer extends HttpServlet {
+public class GetCustomerServlet extends HttpServlet {
     public final CustomerService customerService = new CustomerService();
 
     @Override
@@ -42,7 +42,7 @@ public class GetCustomer extends HttpServlet {
             }
         } else {
             jsonResponse.put("status", "error");
-            jsonResponse.put("message", "All fields are required!");
+            jsonResponse.put("message", "Mobile number not included!");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
 

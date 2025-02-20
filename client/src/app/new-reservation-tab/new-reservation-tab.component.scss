@@ -145,9 +145,33 @@
 }
 
 .driver-name {
-    @apply w-[250PX] mt-3 mb-7;
+    @apply w-[250PX] mt-3 mb-5;
 }
 
 .driver-phone {
-    @apply w-[250PX] mt-3 mb-7;
+    @apply w-[250PX] mt-3 mb-5;
+}
+
+.vehicle-details {
+    @apply flex space-x-16;
+}
+
+.regNumber {
+    @apply w-[250PX] mt-3 mb-5;
+}
+
+.brand {
+    @apply w-[250PX] mt-3 mb-5;
+}
+
+.vehicle-license {
+    @apply flex space-x-16;
+}
+
+.license-exp-date {
+    @apply w-[250PX] mt-3 mb-5;
+}
+
+.insurance-exp-date {
+    @apply w-[250PX] mt-3 mb-5;
 }
