@@ -1,7 +1,9 @@
 package com.example.server.controllers;
 
+import com.example.server.models.User;
 import com.example.server.services.UserService;
 import com.example.server.utils.JsonUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,17 +24,34 @@ public class LoginServlet extends HttpServlet {
         String username = requestBody.get("username");
         String password = requestBody.get("password");
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         boolean success = userService.login(username, password);
-        Map<String, String> responseJson = new HashMap<>();
+        Map<String, Object> jsonResponse = new HashMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
 
         if (success) {
-            responseJson.put("message", "Login Successful!");
-            response.setStatus(HttpServletResponse.SC_OK);
+            User user = userService.getUser(username);
+            if (user != null) {
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("id", user.getId());
+                userData.put("firstName", user.getFirstName());
+                userData.put("lastName", user.getLastName());
+                userData.put("email", user.getEmail());
+                userData.put("phone", user.getPhone());
+                userData.put("username", user.getUsername());
+                userData.put("designation", user.getDesignation());
+
+                jsonResponse.put("message", "Login Successful!");
+                jsonResponse.put("user", userData);
+                response.setStatus(HttpServletResponse.SC_OK);
+            }
         } else {
-            responseJson.put("message", "Invalid Username or Password!");
+            jsonResponse.put("message", "Invalid Username or Password!");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
 
-        JsonUtils.sendJsonResponse(response, responseJson);
+        response.getWriter().write(objectMapper.writeValueAsString(jsonResponse));
     }
 }

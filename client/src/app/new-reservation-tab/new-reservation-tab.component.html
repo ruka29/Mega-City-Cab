@@ -187,7 +187,19 @@
             {{ vehicleErrorMessage }}
           </p>
         </div>
+
+        <div class="proceed-btn">
+          <button type="button" (click)="setIsPopupVisible()">Proceed</button>
+        </div>
       </div>
     </div>
   </form>
+
+  <div *ngIf="isPopupVisible" class="popup-overlay">
+    <div class="popup-container">
+      <h2>Popup Title</h2>
+      <p>This is a popup window.</p>
+      <!-- <button (click)="closePopup()">Close</button> -->
+    </div>
+  </div>
 </div>

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewReservationTabComponent {
   schedule: boolean = false;
+  isPopupVisible: boolean = false;
   vehicleType: string = '';
   customerPhone: string = '';
   customerErrorMessage: string = 'Please enter a registered customer phone number!';
@@ -97,6 +98,8 @@ export class NewReservationTabComponent {
         },
         error: (error) => {
           console.error('Error:', error);
+          this.registrationNumber = '';
+          this.driverEmail = '';
           this.vehicleErrorMessage = `No available ${this.vehicleType}s at the moment!`;
           // this.responseData = 'Error occurred';
         },
@@ -122,6 +125,10 @@ export class NewReservationTabComponent {
         // this.responseData = 'Error occurred';
       },
     });
+  }
+
+  setIsPopupVisible() {
+    this.isPopupVisible = !this.isPopupVisible;
   }
 
   setSchedule(event: Event) {
