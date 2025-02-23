@@ -16,7 +16,7 @@ export class ProfileTabComponent {
   email: string = '';
   designation: string = '';
 
-  isEditing: boolean = true;
+  isEditing: boolean = false;
 
   constructor() {
     const user = sessionStorage.getItem('user');

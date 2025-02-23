@@ -1,9 +1,9 @@
 .container {
-  @apply m-[40px] flex flex-col;
+  @apply mt-[40px] flex flex-col;
 }
 
 .heading {
-  @apply text-4xl font-nunito font-bold ml-[100px];
+  @apply text-4xl font-nunito font-bold ml-[90px];
 }
 
 .form-container {
@@ -113,7 +113,7 @@
 }
 
 .vehicle-btn {
-  @apply border border-[2px] hover:border-[#FFB800] hover:border-[2px] rounded-[9px] pt-[10px] pr-[15px] pb-[10px] pl-[15px];
+  @apply border-[2px] hover:border-[#FFB800] hover:border-[2px] rounded-[9px] pt-[10px] pr-[15px] pb-[10px] pl-[15px];
 }
 
 .vehicle-container {

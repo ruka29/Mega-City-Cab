@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DefaultTabComponent } from '../default-tab/default-tab.component';
 import { NewReservationTabComponent } from '../new-reservation-tab/new-reservation-tab.component';
 import { ManageCustomersTabComponent } from '../manage-customers-tab/manage-customers-tab.component';
 import { ManageReservationTabComponent } from '../manage-reservation-tab/manage-reservation-tab.component';
 import { ProfileTabComponent } from '../profile-tab/profile-tab.component';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
+import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
 
 @Component({
   selector: 'app-dashboard-action-panel',
@@ -15,6 +17,8 @@ import { ProfileTabComponent } from '../profile-tab/profile-tab.component';
     NewReservationTabComponent,
     ManageCustomersTabComponent,
     ManageReservationTabComponent,
+    AddCustomerComponent,
+    EditCustomerComponent,
     ProfileTabComponent,
   ],
   templateUrl: './dashboard-action-panel.component.html',
@@ -22,4 +26,9 @@ import { ProfileTabComponent } from '../profile-tab/profile-tab.component';
 })
 export class DashboardActionPanelComponent {
   @Input() activeTab: string = '';
+  @Output() tabChange = new EventEmitter<string>();
+
+  setActive(tab: string) {
+    this.tabChange.emit(tab);
+  }
 }

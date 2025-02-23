@@ -10,31 +10,6 @@
   @apply flex flex-col mt-10 justify-center items-center;
 }
 
-.hero {
-  @apply flex w-[1200px] items-center space-x-8;
-}
-
-.user-image {
-  @apply w-[150px] h-auto rounded-full;
-}
-
-.name-email {
-}
-
-.name {
-  @apply text-3xl font-nunito font-bold;
-}
-
-.email {
-  @apply text-xl font-nunito;
-}
-
-.edit-button {
-  button {
-    @apply text-black py-3 px-4 rounded-[9px] border border-[#FFB800] hover:bg-amber-500 transition duration-300 font-nunito font-bold mb-2;
-  }
-}
-
 .form-container {
   @apply flex mt-16 w-[1200px] space-x-[150px] justify-center;
 }
