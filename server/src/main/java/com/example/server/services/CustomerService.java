@@ -24,4 +24,13 @@ public class CustomerService {
         Customer customer = new Customer(id, firstName, lastName, email, phone, address, NIC);
         return customerDAO.registerCustomer(customer);
     }
+
+    public boolean updateCustomer(String id, String firstName, String lastName, String email, String phone, String address, String NIC) {
+        if (customerDAO.findByID(id) == null) {
+            return false;
+        }
+
+        Customer customer = new Customer(id, firstName, lastName, email, phone, address, NIC);
+        return customerDAO.updateCustomer(customer);
+    }
 }

@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
@@ -19,7 +18,6 @@ import { NotificationComponent } from '../notification/notification.component';
 })
 export class AddCustomerComponent {
   private http = inject(HttpClient);
-  private router = inject(Router);
   message: string = '';
   messageType: string = '';
 
@@ -51,10 +49,6 @@ export class AddCustomerComponent {
             this.message = '';
             this.messageType = '';
           }, 5000);
-
-          // sessionStorage.setItem('user', JSON.stringify(response.user));
-
-          // this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           if (error.error && error.error.message) {

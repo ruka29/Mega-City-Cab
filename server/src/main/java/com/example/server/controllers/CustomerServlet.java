@@ -41,6 +41,9 @@ public class CustomerServlet extends HttpServlet {
                 case "/get-customer":
                     getCustomer(request, response);
                     break;
+                case "/update":
+                    updateCustomer(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Endpoint not found");
             }
@@ -106,5 +109,34 @@ public class CustomerServlet extends HttpServlet {
         }
 
         response.getWriter().write(objectMapper.writeValueAsString(jsonResponse));
+    }
+
+    protected void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        requestBody = JsonUtils.parseJsonRequest(request);
+
+        String id = requestBody.get("id");
+        String firstName = requestBody.get("firstName");
+        String lastName = requestBody.get("lastName");
+        String email = requestBody.get("email");
+        String phone = requestBody.get("phone");
+        String address = requestBody.get("address");
+        String NIC = requestBody.get("nic");
+
+        Map<String, String> jsonResponse = new HashMap<>();
+        if (id == null || firstName == null || lastName == null || email == null || phone == null || address == null || NIC == null) {
+            jsonResponse.put("message", "All fields are required");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } else {
+            boolean success = customerService.updateCustomer(id,firstName, lastName, email, phone, address, NIC);
+            if (success) {
+                jsonResponse.put("message", "Customer updated successfully!");
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                jsonResponse.put("message", "Customer update failed! Customer not found!");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        JsonUtils.sendJsonResponse(response, jsonResponse);
     }
 }
