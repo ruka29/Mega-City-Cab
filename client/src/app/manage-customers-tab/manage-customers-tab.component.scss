@@ -11,7 +11,7 @@
 }
 
 .add-customer-btn {
-    @apply w-[1200px] bg-[#e6e6e6db] hover:bg-[#dcdcdcdb] transition duration-300 text-black font-semibold px-6 py-6 rounded-[15px];
+    @apply w-[1200px] bg-[#e6e6e6db] hover:bg-[#dcdcdcdb] shadow-lg transition duration-300 text-black font-semibold px-6 py-6 rounded-[15px];
 }
 
 .btn {

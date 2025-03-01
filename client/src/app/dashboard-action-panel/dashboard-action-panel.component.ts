@@ -7,6 +7,8 @@ import { ManageReservationTabComponent } from '../manage-reservation-tab/manage-
 import { ProfileTabComponent } from '../profile-tab/profile-tab.component';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
+import { ReScheduleTabComponent } from '../re-schedule-tab/re-schedule-tab.component';
+import { ReservationHistoryTabComponent } from '../reservation-history-tab/reservation-history-tab.component';
 
 @Component({
   selector: 'app-dashboard-action-panel',
@@ -19,6 +21,8 @@ import { EditCustomerComponent } from '../edit-customer/edit-customer.component'
     ManageReservationTabComponent,
     AddCustomerComponent,
     EditCustomerComponent,
+    ReScheduleTabComponent,
+    ReservationHistoryTabComponent,
     ProfileTabComponent,
   ],
   templateUrl: './dashboard-action-panel.component.html',

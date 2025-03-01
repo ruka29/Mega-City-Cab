@@ -12,12 +12,42 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/api/manage-reservation/new")
-public class NewReservationServlet extends HttpServlet {
+@WebServlet("/api/manage-reservation/*")
+public class ReservationServlet extends HttpServlet {
     public final ReservationService reservationService = new ReservationService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String pathInfo = request.getPathInfo();
+
+        try {
+            if (pathInfo == null || pathInfo.equals("/")) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid request");
+                return;
+            }
+
+            switch (pathInfo) {
+                case "/new":
+                    newReservation(request, response);
+                    break;
+                case "/reservation-history":
+                    newReservation(request, response);
+                    break;
+                default:
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND, "Endpoint not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
+    }
+
+    protected void newReservation(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String> requestBody = JsonUtils.parseJsonRequest(request);
 
         String vehicleID = requestBody.get("vehicleID");

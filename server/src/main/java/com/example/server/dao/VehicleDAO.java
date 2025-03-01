@@ -7,6 +7,10 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static com.mongodb.client.model.Filters.eq;
 
 public class VehicleDAO {
@@ -24,7 +28,11 @@ public class VehicleDAO {
     }
 
     public Vehicle findByAvailability(String type) {
-        Document vehicleDoc = vehicleCollection.find(Filters.and(Filters.eq("type", type), Filters.eq("status", "available"))).first();
+        List<Document> vehicles = vehicleCollection.find(
+                Filters.and(Filters.eq("type", type), Filters.eq("status", "available"))
+        ).into(new ArrayList<>());
+
+        Document vehicleDoc = vehicles.isEmpty() ? null : vehicles.get(new Random().nextInt(vehicles.size()));
 
         return getVehicle(vehicleDoc);
     }
