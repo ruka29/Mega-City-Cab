@@ -15,7 +15,7 @@
 }
 
 .label {
-  @apply text-xl font-nunito;
+  @apply text-xl font-nunito font-bold;
 }
 
 .load-customer {
@@ -30,28 +30,36 @@
   }
 }
 
-.name {
-  @apply flex space-x-16;
+// .name {
+//   @apply flex space-x-16;
+// }
+
+.icon {
+  @apply w-[30px] h-[30px] mr-5;
 }
 
 .first-name {
-  @apply w-[250px];
+  @apply w-[250px] flex mt-4;
 }
 
 .address {
-  @apply mt-3 mb-3;
+  @apply mt-4 mb-4 flex;
 }
 
 .details {
-  @apply font-nunito text-2xl font-bold;
+  @apply font-nunito text-2xl;
 }
 
-.email-nic {
-  @apply flex space-x-16;
-}
+// .email-nic {
+//   @apply flex space-x-16;
+// }
 
 .email {
-  @apply w-[250px];
+  @apply mt-4 mb-4 flex;
+}
+
+.nic{
+  @apply flex;
 }
 
 .customer-error {
@@ -59,11 +67,11 @@
 }
 
 .locations {
-  @apply flex space-x-16;
+  @apply flex;
 }
 
 .pick {
-  @apply w-[250px];
+  @apply w-[250px] flex-1;
 
   input {
     @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10;
@@ -78,18 +86,30 @@
   }
 }
 
+.schedule {
+  @apply flex border rounded-[9px] border-gray-300 p-2 mb-3;
+}
+
+.book-now-btn {
+  @apply flex-1;
+
+  button {
+    @apply w-[250px] text-black py-3 rounded-[9px] border border-[#FFB800] hover:bg-[#FFB8008c] transition duration-300 font-nunito font-bold;
+  }
+}
+
 .schedule-btn {
   button {
-    @apply w-[250px] text-black py-3 rounded-[9px] border border-[#FFB800] hover:bg-amber-500 transition duration-300 font-nunito font-bold mb-2;
+    @apply w-[250px] text-black py-3 rounded-[9px] border border-[#FFB800] hover:bg-[#FFB8008c] transition duration-300 font-nunito font-bold;
   }
 }
 
 .schedule-details {
-  @apply flex space-x-16;
+  @apply flex;
 }
 
 .date {
-  @apply w-[250px];
+  @apply w-[250px] flex-1;
 
   input {
     @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10;
@@ -109,11 +129,11 @@
 }
 
 .vehicle-type {
-  @apply flex space-x-5 mt-3 mb-10;
+  @apply flex justify-between ml-7 mr-7 mt-3 mb-10;
 }
 
 .vehicle-btn {
-  @apply border-[2px] hover:border-[#FFB800] hover:border-[2px] rounded-[9px] pt-[10px] pr-[15px] pb-[10px] pl-[15px];
+  @apply border-[2px] hover:border-[#FFB800] hover:border-[2px] rounded-[9px] pt-[10px] pr-[20px] pb-[10px] pl-[20px];
 }
 
 .vehicle-container {

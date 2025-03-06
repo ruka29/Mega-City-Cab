@@ -94,7 +94,7 @@ export class EditCustomerComponent {
         },
         error: (error) => {
           if (error.error && error.error.message) {
-            console.error('Customer registration failed:', error.error.message);
+            console.error('Customer update failed:', error.error.message);
             this.message = error.error.message;
             this.messageType = 'error';
 
@@ -103,7 +103,7 @@ export class EditCustomerComponent {
               this.messageType = '';
             }, 5000);
           } else {
-            console.error('registration failed:', 'An unknown error occurred.');
+            console.error('Update failed:', 'An unknown error occurred.');
           }
         },
       });

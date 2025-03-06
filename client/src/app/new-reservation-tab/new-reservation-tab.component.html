@@ -15,41 +15,6 @@
           />
         </div>
 
-        <div *ngIf="customerID !== ''">
-          <div class="name">
-            <div class="first-name">
-              <div class="label">First Name</div>
-              <div class="details">{{ fisrtName }}</div>
-            </div>
-
-            <div class="last-name">
-              <div class="label">Last Name</div>
-              <div class="details">{{ lastName }}</div>
-            </div>
-          </div>
-
-          <div class="address">
-            <div class="label">Address</div>
-            <div class="details">{{ address }}</div>
-          </div>
-
-          <div class="email-nic">
-            <div class="email">
-              <div class="label">Email</div>
-              <div class="details">{{ email }}</div>
-            </div>
-
-            <div class="nic">
-              <div class="label">NIC</div>
-              <div class="details">{{ nic }}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="customer-error">
-          <p *ngIf="customerID === ''">{{ customerErrorMessage }}</p>
-        </div>
-
         <div class="locations">
           <div class="pick">
             <div class="label">Pick up Location</div>
@@ -62,14 +27,25 @@
           </div>
         </div>
 
-        <div class="schedule-btn">
-          <button
-            type="button"
-            (click)="setSchedule($event)"
-            [ngClass]="{ 'bg-[#FFB800]': schedule, 'bg-white': !schedule }"
-          >
-            Schedule for Later
-          </button>
+        <div class="schedule">
+          <div class="book-now-btn">
+            <button
+              type="button"
+              (click)="setScheduleFalse($event)"
+              [ngClass]="{ 'bg-[#FFB8008c]': !schedule, 'bg-white': schedule }"
+            >
+              Book Now
+            </button>
+          </div>
+          <div class="schedule-btn">
+            <button
+              type="button"
+              (click)="setScheduleTrue($event)"
+              [ngClass]="{ 'bg-[#FFB8008c]': schedule, 'bg-white': !schedule }"
+            >
+              Schedule for Later
+            </button>
+          </div>
         </div>
 
         <div class="schedule-details">
@@ -83,10 +59,8 @@
             <input type="time" [readOnly]="!schedule" [value]="currentTime" />
           </div>
         </div>
-      </div>
 
-      <div class="vehicle-form">
-        <div class="label">Vehicle Type</div>
+        <div class="label">Select a Vehicle Type</div>
         <div class="vehicle-type">
           <button
             class="vehicle-btn"
@@ -141,8 +115,45 @@
             </div>
           </button>
         </div>
+      </div>
 
-        <div class="label">Driver & Vehicle Details</div>
+      <div class="vehicle-form">
+        <div class="label">Customer Details</div>
+        <div *ngIf="customerID !== ''">
+          <div class="first-name">
+            <div class="icon">
+              <img src="/people.png" alt="people icon">
+            </div>
+            <div class="details">{{ fisrtName + " " + lastName}}</div>
+          </div>
+
+          <div class="address">
+            <div class="icon">
+              <img src="/pin.png" alt="people icon">
+            </div>
+            <div class="details">{{ address }}</div>
+          </div>
+
+          <div class="email">
+            <div class="icon">
+              <img src="/email.png" alt="people icon">
+            </div>
+            <div class="details">{{ email }}</div>
+          </div>
+
+          <div class="nic">
+            <div class="icon">
+              <img src="/identity-card.png" alt="people icon">
+            </div>
+            <div class="details">{{ nic }}</div>
+          </div>
+        </div>
+
+        <div class="customer-error">
+          <p *ngIf="customerID === ''">{{ customerErrorMessage }}</p>
+        </div>
+
+        <div class="label">Trip Details</div>
 
         <div *ngIf="registrationNumber !== '' && driverEmail !== ''">
           <div class="driver-details">

@@ -41,6 +41,9 @@ public class UserServlet extends HttpServlet {
                 case "/get-user":
                     getUser(request, response);
                     break;
+                case "/update":
+                    updateUser(request, response);
+                    break;
                 default:
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Endpoint not found");
             }
@@ -107,5 +110,34 @@ public class UserServlet extends HttpServlet {
         }
 
         response.getWriter().write(objectMapper.writeValueAsString(jsonResponse));
+    }
+
+    protected void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        requestBody = JsonUtils.parseJsonRequest(request);
+
+        String id = requestBody.get("id");
+        String firstName = requestBody.get("firstName");
+        String lastName = requestBody.get("lastName");
+        String email = requestBody.get("email");
+        String phone = requestBody.get("phone");
+        String username = requestBody.get("username");
+        String designation = requestBody.get("designation");
+
+        Map<String, String> jsonResponse = new HashMap<>();
+        if (id == null || firstName == null || lastName == null || email == null || phone == null || username == null || designation == null) {
+            jsonResponse.put("message", "All fields are required");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } else {
+            boolean success = userService.updateUser(id, firstName, lastName, email, phone, username, designation);
+            if (success) {
+                jsonResponse.put("message", designation + " updated successfully!");
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                jsonResponse.put("message", designation + " update failed! User not found!");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        JsonUtils.sendJsonResponse(response, jsonResponse);
     }
 }

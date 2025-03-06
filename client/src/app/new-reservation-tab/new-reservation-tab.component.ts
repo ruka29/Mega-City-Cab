@@ -16,7 +16,7 @@ export class NewReservationTabComponent {
   vehicleType: string = '';
   customerPhone: string = '';
   customerErrorMessage: string = 'Please enter a registered customer phone number!';
-  vehicleErrorMessage: string = 'Please select a vehicle type!';
+  vehicleErrorMessage: string = 'Please enter pick up and drop off locations!';
 
   customerID: string = '';
   fisrtName: string = '';
@@ -131,9 +131,14 @@ export class NewReservationTabComponent {
     this.isPopupVisible = !this.isPopupVisible;
   }
 
-  setSchedule(event: Event) {
+  setScheduleFalse(event: Event) {
     event.preventDefault();
-    this.schedule = !this.schedule;
+    this.schedule = false;
+  }
+
+  setScheduleTrue(event: Event) {
+    event.preventDefault();
+    this.schedule = true;
   }
 
   setVehicleType(vehicleType: string, event: Event) {

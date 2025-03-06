@@ -1,14 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-profile-tab',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, NotificationComponent],
   templateUrl: './profile-tab.component.html',
-  styleUrl: './profile-tab.component.scss'
+  styleUrl: './profile-tab.component.scss',
 })
 export class ProfileTabComponent {
+  private http = inject(HttpClient);
+  message: string = '';
+  messageType: string = '';
+
   firstName: string = '';
   lastName: string = '';
   username: string = '';
@@ -18,16 +30,32 @@ export class ProfileTabComponent {
 
   isEditing: boolean = false;
 
+  userForm = new FormGroup({
+    id: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
+    designation: new FormControl('', [Validators.required]),
+  });
+
   constructor() {
     const user = sessionStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
       this.firstName = userData.firstName;
       this.lastName = userData.lastName;
-      this.username = userData.username;
-      this.phone = userData.phone;
       this.email = userData.email;
-      this.designation = userData.designation;
+      this.userForm.patchValue({
+        id: userData.id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        phone: userData.phone,
+        email: userData.email,
+        username: userData.username,
+        designation: userData.designation,
+      });
     }
   }
 
@@ -35,7 +63,57 @@ export class ProfileTabComponent {
     this.isEditing = !this.isEditing;
   }
 
-  updateUser() {
-    
+  onSubmit() {
+    if (this.userForm.valid) {
+      const url =
+        'http://localhost:8080/server_war_exploded/api/manage-users/update';
+      const userData = this.userForm.value;
+
+      console.log('User Data:', userData);
+
+      this.http.post<{ status: string; user: any }>(url, userData).subscribe({
+        next: (response) => {
+          console.log('Success:', response);
+
+          this.isEditing = !this.isEditing;
+
+          this.message = 'Profile updated successfully!';
+          this.messageType = 'success';
+
+          setTimeout(() => {
+            this.message = '';
+            this.messageType = '';
+          }, 5000);
+        },
+        error: (error) => {
+          if (error.error && error.error.message) {
+            console.error('User update failed:', error.error.message);
+            this.message = error.error.message;
+            this.messageType = 'error';
+
+            setTimeout(() => {
+              this.message = '';
+              this.messageType = '';
+            }, 5000);
+          } else {
+            console.error('update failed:', 'An unknown error occurred.');
+          }
+        },
+      });
+    } else {
+      console.log('Invalid Form');
+      this.message = 'All fields are required!';
+      this.messageType = 'error';
+
+      setTimeout(() => {
+        this.message = '';
+        this.messageType = '';
+      }, 5000);
+    }
+  }
+
+  closeNotification() {
+    this.message = '';
+    this.messageType = '';
   }
 }

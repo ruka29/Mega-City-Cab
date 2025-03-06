@@ -24,45 +24,51 @@
       </div>
     </div>
 
-    <form action="">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="form-container">
         <div class="left-container">
           <div class="user-input">
             <label for="first name">First Name</label>
-            <input type="text" [readOnly]="!isEditing" [value]="firstName" />
+            <input type="text" [readOnly]="!isEditing" formControlName="firstName" />
           </div>
 
           <div class="user-input">
             <label for="phone">Phone</label>
-            <input type="text" [readOnly]="!isEditing" [value]="phone" />
+            <input type="text" [readOnly]="!isEditing" formControlName="phone" />
           </div>
 
           <div class="user-input">
             <label for="username">Username</label>
-            <input type="text" readonly [value]="username" />
+            <input type="text" readonly formControlName="username" />
           </div>
         </div>
 
         <div class="right-container">
           <div class="user-input">
             <label for="Last Name">Last Name</label>
-            <input type="text" [readOnly]="!isEditing" [value]="lastName" />
+            <input type="text" [readOnly]="!isEditing" formControlName="lastName" />
           </div>
 
           <div class="user-input">
             <label for="email">Email</label>
-            <input type="email" [readOnly]="!isEditing" [value]="email" />
+            <input type="email" [readOnly]="!isEditing" formControlName="email" />
           </div>
 
           <div class="user-input">
             <label for="desgnation">Designation</label>
-            <input type="text" readonly [value]="designation" />
+            <input type="text" readonly formControlName="designation" />
           </div>
         </div>
       </div>
       <div *ngIf="isEditing" class="save-btn">
-        <button type="submit" (click)="updateUser()">Save</button>
+        <button type="submit">Save</button>
       </div>
     </form>
   </div>
+  <app-notification
+    *ngIf="message"
+    [message]="message"
+    [messageType]="messageType"
+    (close)="closeNotification()"
+  ></app-notification>
 </div>

@@ -1,6 +1,7 @@
 package com.example.server.services;
 
 import com.example.server.dao.UserDAO;
+import com.example.server.models.Customer;
 import com.example.server.models.User;
 import com.example.server.utils.PasswordUtils;
 import com.example.server.utils.IDUtils;
@@ -22,7 +23,7 @@ public class UserService {
         }
 
         String hashedPassword = PasswordUtils.hashPassword(password);
-        String userID = IDUtils.generateUserID(userDAO, designation);
+        String userID = IDUtils.generateUserID(userDAO);
         User user = new User(userID, firstName, lastName, email, phone, username, hashedPassword, designation);
         return userDAO.registerEmployee(user);
     }
@@ -33,5 +34,14 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public boolean updateUser(String id, String firstName, String lastName, String email, String phone, String username, String designation) {
+        if (userDAO.findByID(id) == null) {
+            return false;
+        }
+
+        User user = new User(id, firstName, lastName, email, phone, username, designation);
+        return userDAO.updateUser(user);
     }
 }
