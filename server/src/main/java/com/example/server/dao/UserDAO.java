@@ -1,7 +1,6 @@
 package com.example.server.dao;
 
 import com.example.server.config.MongoDBConnection;
-import com.example.server.models.Customer;
 import com.example.server.models.User;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

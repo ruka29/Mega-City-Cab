@@ -58,7 +58,7 @@
   @apply mt-4 mb-4 flex;
 }
 
-.nic{
+.nic {
   @apply flex;
 }
 
@@ -73,17 +73,65 @@
 .pick {
   @apply w-[250px] flex-1;
 
-  input {
-    @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10;
+  select {
+    @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10 bg-white;
   }
 }
 
 .drop {
   @apply w-[250px];
 
-  input {
-    @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10;
+  select {
+    @apply w-[250px] px-4 py-3 border border-gray-300 rounded-[9px] focus:outline-none focus:ring-1 focus:ring-[#FFB800] font-nunito mt-3 mb-10 bg-white;
   }
+}
+
+.fare-container {
+  @apply flex;
+}
+
+.lables {
+  @apply flex-col;
+}
+
+.prices {
+  @apply w-[200px];
+}
+
+.price-details {
+  @apply w-[200px] font-nunito font-semibold text-2xl text-right;
+
+  span {
+    @apply font-normal text-xl;
+  }
+}
+
+.pickup {
+  @apply mt-4 mb-4 flex;
+}
+
+.dropoff {
+  @apply mt-4 mb-4 flex;
+}
+
+.distance {
+  @apply flex;
+}
+
+.original-price {
+  @apply mt-4 mb-4 flex;
+}
+
+.discount {
+  @apply mt-4 mb-4 flex;
+}
+
+.discount-details {
+  @apply w-[200px] mt-1 font-nunito text-xl text-right;
+}
+
+.fare {
+  @apply mt-4 mb-4 flex;
 }
 
 .schedule {
@@ -164,14 +212,6 @@
   @apply flex space-x-16;
 }
 
-.driver-name {
-  @apply w-[250PX] mt-3 mb-5;
-}
-
-.driver-phone {
-  @apply w-[250PX] mt-3 mb-5;
-}
-
 .vehicle-details {
   @apply flex space-x-16;
 }
@@ -198,7 +238,7 @@
 
 .proceed-btn {
   button {
-    @apply w-[250px] bg-[#FFB800] text-black py-3 rounded-[9px] hover:bg-amber-500 transition duration-300 font-nunito font-bold;
+    @apply w-[250px] text-black py-3 rounded-[9px] border border-[#FFB800] transition duration-300 font-nunito font-bold;
   }
 }
 
@@ -207,17 +247,55 @@
 }
 
 .popup-container {
-  @apply bg-white p-6 rounded-lg shadow-lg w-[400px] text-center;
+  @apply bg-white p-6 rounded-lg shadow-lg w-[450px] items-center justify-center;
+}
 
-  h2 {
-    @apply text-xl font-bold mb-4;
-  }
+.detail-container {
+  @apply flex-col mt-4;
+}
 
-  p {
-    @apply mb-4;
-  }
+.registration-number {
+  @apply flex mb-3;
+}
 
+.popup-vehicle-type {
+  @apply flex;
+}
+
+.popup-details {
+  @apply font-nunito text-xl;
+}
+
+.driver {
+  @apply flex mt-4 items-center;
+}
+
+.driver-name {
+  @apply font-nunito text-2xl mb-2;
+}
+
+.driver-img {
+  @apply mr-3 w-[100px] h-auto;
+}
+
+.driver-reload-btn {
   button {
-    @apply bg-[#FFB800] text-white py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e6a600];
+    @apply flex justify-center items-center font-nunito text-[20px] rounded-lg w-full h-[50px] cursor-pointer transition-colors border border-[#FFB8008C] hover:bg-[#FFB8008C] my-5;
+
+    img {
+      @apply h-[25px] mr-3;
+    }
   }
+}
+
+.cancel-confirm-btn {
+  @apply flex justify-between w-full;
+}
+
+.cancel-btn {
+  @apply text-black py-3 px-3 rounded-[9px] bg-gray-200 hover:bg-[#FF5B5B] transition duration-300 font-nunito font-bold;
+}
+
+.confirm-btn {
+  @apply text-black py-3 px-3 rounded-[9px] bg-[#4CAF50] transition duration-300 font-nunito font-bold;
 }
