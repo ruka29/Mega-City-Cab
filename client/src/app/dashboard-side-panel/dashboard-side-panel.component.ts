@@ -25,8 +25,8 @@ export class DashboardSidePanelComponent {
     const user = sessionStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
-      this.firstName = userData.firstName || 'User';
-      this.designation = userData.designation || 'Employee';
+      this.firstName = userData.firstName;
+      this.designation = userData.designation;
     }
 
     this.setGreeting();
@@ -56,9 +56,10 @@ export class DashboardSidePanelComponent {
     ];
 
     const adminButtons = [
-      {tabName: 'new reservation', iconPath: '/add.png'},
-      {tabName: 'manage customers', iconPath: '/customer.png'},
-      {tabName: 'manage reservations', iconPath: '/time-management.png'}
+      {tabName: 'manage vehicles', iconPath: '/gear.png'},
+      {tabName: 'manage drivers', iconPath: '/person.png'},
+      {tabName: 'manage users', iconPath: '/management.png'},
+      {tabName: 'system settings', iconPath: '/system.png'}
     ];
 
     const driverButtons = [

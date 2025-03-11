@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/api/manage-users/*")
@@ -43,6 +44,9 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "/update":
                     updateUser(request, response);
+                    break;
+                case "/get-all-users":
+                    getAllUsers(request, response);
                     break;
                 default:
                     response.sendError(HttpServletResponse.SC_NOT_FOUND, "Endpoint not found");
@@ -139,5 +143,35 @@ public class UserServlet extends HttpServlet {
         }
 
         JsonUtils.sendJsonResponse(response, jsonResponse);
+    }
+
+    protected void getAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, String> requestBody = JsonUtils.parseJsonRequest(request);
+        String designation = requestBody.get("designation");
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        Map<String, Object> jsonResponse = new HashMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        if (designation != null) {
+            List<User> drivers = userService.getAllUsers(designation);
+            if (drivers != null) {
+                jsonResponse.put("status", "success");
+                jsonResponse.put("drivers", drivers);
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                jsonResponse.put("status", "error");
+                jsonResponse.put("message", "Drivers not found!");
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+        } else {
+            jsonResponse.put("status", "error");
+            jsonResponse.put("message", "Designation not included!");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+
+        response.getWriter().write(objectMapper.writeValueAsString(jsonResponse));
     }
 }

@@ -6,6 +6,8 @@ import com.example.server.models.User;
 import com.example.server.utils.PasswordUtils;
 import com.example.server.utils.IDUtils;
 
+import java.util.List;
+
 public class UserService {
     private final UserDAO userDAO = new UserDAO();
 
@@ -43,5 +45,13 @@ public class UserService {
 
         User user = new User(id, firstName, lastName, email, phone, username, designation);
         return userDAO.updateUser(user);
+    }
+
+    public List<User> getAllUsers(String designation) {
+        if (userDAO.getAllUsers(designation) == null) {
+            return null;
+        }
+
+        return userDAO.getAllUsers(designation);
     }
 }

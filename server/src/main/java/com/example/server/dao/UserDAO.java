@@ -2,12 +2,16 @@ package com.example.server.dao;
 
 import com.example.server.config.MongoDBConnection;
 import com.example.server.models.User;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -106,5 +110,23 @@ public class UserDAO {
         );
 
         return result.getModifiedCount() > 0;
+    }
+
+    public List<User> getAllUsers(String designation) {
+        List<User> drivers = new ArrayList<>();
+
+        FindIterable<Document> driverDocs = userCollection.find(eq("designation", designation));
+        for (Document doc : driverDocs) {
+            drivers.add(new User(
+                    doc.getString("userID"),
+                    doc.getString("firstName"),
+                    doc.getString("lastName"),
+                    doc.getString("email"),
+                    doc.getString("phone"),
+                    doc.getString("username"),
+                    doc.getString("designation")
+            ));
+        }
+        return drivers;
     }
 }
