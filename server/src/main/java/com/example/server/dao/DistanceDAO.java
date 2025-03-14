@@ -13,35 +13,47 @@ public class DistanceDAO {
     private final MongoCollection<Document> distanceCollection;
 
     public DistanceDAO() {
-        MongoDatabase database = MongoDBConnection.getDatabase();
-        this.distanceCollection = database.getCollection("distances");
+        try {
+            MongoDatabase database = MongoDBConnection.getDatabase();
+            this.distanceCollection = database.getCollection("distances");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<String> getAllPickupLocations() {
-        List<String> pickupLocations = new ArrayList<>();
+        try {
+            List<String> pickupLocations = new ArrayList<>();
 
-        distanceCollection.find().forEach(doc -> {
-            String pickup = doc.getString("pickup");
+            distanceCollection.find().forEach(doc -> {
+                String pickup = doc.getString("pickup");
 
-            if (!pickupLocations.contains(pickup)) {
-                pickupLocations.add(pickup);
-            }
-        });
+                if (!pickupLocations.contains(pickup)) {
+                    pickupLocations.add(pickup);
+                }
+            });
 
-        return pickupLocations;
+            return pickupLocations;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getDistance(String pickup, String dropOff) {
-        Document document = distanceCollection.find(Filters.eq("pickup", pickup)).first();
+        try {
+            Document document = distanceCollection.find(Filters.eq("pickup", pickup)).first();
 
-        if (document != null) {
-            Document distances = (Document) document.get("distances");
+            if (document != null) {
+                Document distances = (Document) document.get("distances");
 
-            if (distances != null && distances.containsKey(dropOff)) {
-                return distances.getInteger(dropOff);
+                if (distances != null && distances.containsKey(dropOff)) {
+                    return distances.getInteger(dropOff);
+                }
             }
-        }
 
-        return 0;
+            return 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

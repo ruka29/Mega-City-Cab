@@ -19,114 +19,142 @@ public class UserDAO {
     private final MongoCollection<Document> userCollection;
 
     public UserDAO() {
-        MongoDatabase database = MongoDBConnection.getDatabase();
-        this.userCollection = database.getCollection("users");
+        try {
+            MongoDatabase database = MongoDBConnection.getDatabase();
+            this.userCollection = database.getCollection("users");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User findByUsername(String username) {
-        Document userDoc = userCollection.find(eq("username", username)).first();
+        try {
+            Document userDoc = userCollection.find(eq("username", username)).first();
 
-        if(userDoc != null) {
-            return new User(
-                userDoc.getString("userID"),
-                userDoc.getString("firstName"),
-                userDoc.getString("lastName"),
-                userDoc.getString("email"),
-                userDoc.getString("phone"),
-                userDoc.getString("username"),
-                userDoc.getString("password"),
-                userDoc.getString("designation")
-            );
+            if(userDoc != null) {
+                return new User(
+                        userDoc.getString("userID"),
+                        userDoc.getString("firstName"),
+                        userDoc.getString("lastName"),
+                        userDoc.getString("email"),
+                        userDoc.getString("phone"),
+                        userDoc.getString("username"),
+                        userDoc.getString("password"),
+                        userDoc.getString("designation")
+                );
+            }
+
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     public User findByID(String id) {
-        Document userDoc = userCollection.find(eq("userID", id)).first();
+        try {
+            Document userDoc = userCollection.find(eq("userID", id)).first();
 
-        if(userDoc != null) {
-            return new User(
-                    userDoc.getString("userID"),
-                    userDoc.getString("firstName"),
-                    userDoc.getString("lastName"),
-                    userDoc.getString("email"),
-                    userDoc.getString("phone"),
-                    userDoc.getString("username"),
-                    userDoc.getString("password"),
-                    userDoc.getString("designation")
-            );
+            if(userDoc != null) {
+                return new User(
+                        userDoc.getString("userID"),
+                        userDoc.getString("firstName"),
+                        userDoc.getString("lastName"),
+                        userDoc.getString("email"),
+                        userDoc.getString("phone"),
+                        userDoc.getString("username"),
+                        userDoc.getString("password"),
+                        userDoc.getString("designation")
+                );
+            }
+
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     public User findLastUser() {
-        Document lastUser = userCollection.find().sort(Sorts.descending("userID")).first();
+        try {
+            Document lastUser = userCollection.find().sort(Sorts.descending("userID")).first();
 
-        if(lastUser != null) {
-            return new User(
-                    lastUser.getString("userID"),
-                    lastUser.getString("firstName"),
-                    lastUser.getString("lastName"),
-                    lastUser.getString("email"),
-                    lastUser.getString("phone"),
-                    lastUser.getString("username"),
-                    lastUser.getString("password"),
-                    lastUser.getString("designation")
-            );
+            if(lastUser != null) {
+                return new User(
+                        lastUser.getString("userID"),
+                        lastUser.getString("firstName"),
+                        lastUser.getString("lastName"),
+                        lastUser.getString("email"),
+                        lastUser.getString("phone"),
+                        lastUser.getString("username"),
+                        lastUser.getString("password"),
+                        lastUser.getString("designation")
+                );
+            }
+
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     public boolean registerEmployee(User user) {
-        Document newUser = new Document()
-                .append("userID", user.getId())
-                .append("firstName", user.getFirstName())
-                .append("lastName", user.getLastName())
-                .append("email", user.getEmail())
-                .append("phone", user.getPhone())
-                .append("username", user.getUsername())
-                .append("password", user.getPassword())
-                .append("designation", user.getDesignation());
+        try {
+            Document newUser = new Document()
+                    .append("userID", user.getId())
+                    .append("firstName", user.getFirstName())
+                    .append("lastName", user.getLastName())
+                    .append("email", user.getEmail())
+                    .append("phone", user.getPhone())
+                    .append("username", user.getUsername())
+                    .append("password", user.getPassword())
+                    .append("designation", user.getDesignation());
 
-        userCollection.insertOne(newUser);
-        return true;
+            userCollection.insertOne(newUser);
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean updateUser(User user) {
-        Document updatedUser = new Document()
-                .append("firstName", user.getFirstName())
-                .append("lastName", user.getLastName())
-                .append("email", user.getEmail())
-                .append("phone", user.getPhone())
-                .append("username", user.getUsername())
-                .append("designation", user.getDesignation());
+        try {
+            Document updatedUser = new Document()
+                    .append("firstName", user.getFirstName())
+                    .append("lastName", user.getLastName())
+                    .append("email", user.getEmail())
+                    .append("phone", user.getPhone())
+                    .append("username", user.getUsername())
+                    .append("designation", user.getDesignation());
 
-        UpdateResult result = userCollection.updateOne(
-                Filters.eq("userID", user.getId()),
-                new Document("$set", updatedUser)
-        );
+            UpdateResult result = userCollection.updateOne(
+                    Filters.eq("userID", user.getId()),
+                    new Document("$set", updatedUser)
+            );
 
-        return result.getModifiedCount() > 0;
+            return result.getModifiedCount() > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<User> getAllUsers(String designation) {
-        List<User> drivers = new ArrayList<>();
+        try {
+            List<User> drivers = new ArrayList<>();
 
-        FindIterable<Document> driverDocs = userCollection.find(eq("designation", designation));
-        for (Document doc : driverDocs) {
-            drivers.add(new User(
-                    doc.getString("userID"),
-                    doc.getString("firstName"),
-                    doc.getString("lastName"),
-                    doc.getString("email"),
-                    doc.getString("phone"),
-                    doc.getString("username"),
-                    doc.getString("designation")
-            ));
+            FindIterable<Document> driverDocs = userCollection.find(eq("designation", designation));
+            for (Document doc : driverDocs) {
+                drivers.add(new User(
+                        doc.getString("userID"),
+                        doc.getString("firstName"),
+                        doc.getString("lastName"),
+                        doc.getString("email"),
+                        doc.getString("phone"),
+                        doc.getString("username"),
+                        doc.getString("designation")
+                ));
+            }
+            return drivers;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return drivers;
     }
 }

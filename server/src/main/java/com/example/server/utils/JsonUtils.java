@@ -1,8 +1,6 @@
 package com.example.server.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.json.bind.Jsonb;
-import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -12,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonUtils {
-    private static final ObjectMapper objectMapper = new ObjectMapper();;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static Map<String, String> parseJsonRequest(HttpServletRequest request) throws IOException {
         StringBuilder json = new StringBuilder();

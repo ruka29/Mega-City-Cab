@@ -46,10 +46,11 @@ export class ManageVehiclesComponent {
   getAllVehicles() {
     const url = `http://localhost:8080/server_war_exploded/api/manage-vehicles/get-all-vehicles`;
 
-    this.http.post<{ vehicle: any[]; status: string }>(url, {}).subscribe({
+    this.http.post<{ vehicles: any[]; status: string }>(url, {}).subscribe({
       next: (response) => {
         if (response.status === 'success') {
-          this.vehicles = response.vehicle;
+          this.vehicles = response.vehicles;
+          console.log('Vehicles:', response.vehicles);
         }
       },
       error: (error) => {
